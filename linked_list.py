@@ -92,6 +92,32 @@ class LinkedList:
             self.node.next = self.head
             self.head = self.node
 
+    def reverse(self):
+        if self.head == None or self.head.next == None:
+            return
+        previous = self.head
+        current = previous.next
+        post = current.next
+        previous.next = None
+        while post != None:
+            current.next = previous
+            previous = current
+            current = post
+            post = post.next
+        current.next = previous
+        self.head = current
+
+    def find_middle(self):
+        if self.head == None:
+            return 0
+        pt = self.head
+        pt2 = self.head
+        while pt2.next != None and pt2.next.next != None:
+            pt = pt.next
+            pt2 = pt2.next.next
+        return pt.data
+
+
     def __str__(self):
         string = '['
         current = self.head
