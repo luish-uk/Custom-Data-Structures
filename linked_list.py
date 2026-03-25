@@ -20,10 +20,83 @@ class LinkedList:
                 current = current.next
             current.next = self.node
 
+    def length(self):
+        if self.head == None:
+            return 0
+        length = 1
+        current = self.head
+        while current.next != None:
+            current = current.next
+            length += 1
+        return length
+
+    def insert(self, index, data):
+        size = self.length()
+        index-=1 #Asssuming no zero index input 
+        if index == 0:
+            return self.prepend(data)
+        if (index) == size:
+            return self.append(data) 
+        if size < (index) or index < 0:
+            return print('Index is out of range')
+        self.node = Node(data)
+        backlink = self.head
+        i = 0
+        while i < index-1:
+            backlink = backlink.next
+            i+=1
+        frontlink = backlink.next 
+        backlink.next = self.node
+        self.node.next = frontlink 
+
+    def delete(self, data):
+        if self.head == None:
+            return 
+        if self.head.data == data:
+            self.head = self.head.next
+        else:
+            frontlink = self.head
+            i = 0
+            while frontlink.data != data:
+                frontlink = frontlink.next
+                i += 1
+            backlink = self.head
+            j = 0
+            while (i-1) > j:
+                backlink = backlink.next
+                j += 1
+            backlink.next = frontlink.next
+
+    def search(self, data):
+        current = self.head
+        while current != None:
+            if current.data == data:
+                return True
+            current = current.next
+        return False
+            
+
+    def get(self, index):
+        current = self.head
+        i = 1
+        while i < index:
+            current = current.next
+            i+=1
+        return current.data
+
+    def prepend(self, data):
+        self.node = Node(data)
+        if self.head == None:
+            self.head = self.node
+        else:
+            self.node.next = self.head
+            self.head = self.node
+
     def __str__(self):
         string = '['
-        while self.head.next != None:
-            string += f'{self.head.data} -> '
-            self.head = self.head.next
-        string += f'{self.head.data} -> None]'
+        current = self.head
+        while current.next != None:
+            string += f'{current.data} -> '
+            current = current.next
+        string += f'{current.data} -> None]'
         return string
