@@ -82,21 +82,21 @@ class BinarySearchTree:
                 pointer.val = self.max(pointer.right)
             return pointer.val
         
-    def inorder_traversal(self, pointer=None):
-        List = []
+    def inorder_traversal(self, pointer=None, List=None):
         if self.root == None:
             return False
-        else:
-            if pointer == None:
+        if pointer == None:
                 pointer = self.root
-            if pointer.left != None:
-                pointer.val = self.inorder_traversal(pointer.left)
-            List.append(pointer.val)
-            if pointer.right != None:
-                pointer.val = self.inorder_traversal(pointer.right)
-            List.append(pointer.val)
+        value = pointer.val
+        if List == None:
+            List = []
+        if pointer.left != None:
+            self.inorder_traversal(pointer.left, List)
+        List.append(value)
+        if pointer.right != None:
+            self.inorder_traversal(pointer.right, List)
+        return List
         
-
 
 
 
