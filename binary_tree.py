@@ -86,7 +86,7 @@ class BinarySearchTree:
         if self.root == None:
             return False
         if pointer == None:
-                pointer = self.root
+            pointer = self.root
         value = pointer.val
         if List == None:
             List = []
@@ -96,7 +96,63 @@ class BinarySearchTree:
         if pointer.right != None:
             self.inorder_traversal(pointer.right, List)
         return List
-        
+    
+    def preorder_traversal(self, pointer=None, List=None):
+        if self.root == None:
+            return False
+        if pointer == None:
+            pointer = self.root
+        value = pointer.val
+        if List == None:
+            List = []
+        List.append(value)
+        if pointer.left != None:
+            self.preorder_traversal(pointer.left, List)
+        if pointer.right != None:
+            self.preorder_traversal(pointer.right, List)
+        return List
+    
+
+    def postorder_traversal(self, pointer=None, List=None):
+        if self.root == None:
+            return False
+        if pointer == None:
+            pointer = self.root
+        value = pointer.val
+        if List == None:
+            List = []
+        if pointer.left != None:
+            self.postorder_traversal(pointer.left, List)
+        if pointer.right != None:
+            self.postorder_traversal(pointer.right, List)
+        List.append(value)
+        return List
+    
+    def delete(self, key, pointer=None):
+        if self.root == None:
+            return False
+        if pointer == None:
+            pointer = self.root
+        value = pointer.val
+        if value > key:
+            if pointer.left:
+                pointer.left = self.delete(key, pointer.left)
+        elif value < key:
+            if pointer.right: 
+                pointer.right = self.delete(key, pointer.right)
+        else:
+            if pointer.left == None:
+                return pointer.right
+            elif pointer.right == None:
+                return pointer.left
+            
+
+            min = pointer.right
+            while min.left != None:
+                min = min.left
+            pointer.val = min.val
+            pointer.right = self.delete(pointer.val, pointer.right)
+        return pointer
 
 
 
@@ -111,16 +167,3 @@ class BinarySearchTree:
 
 
 
-
-            #     if pointer.right != None:
-            #         pointer.val = self.inorder_traversal(pointer.right)
-            #     else:
-            #         List.append(pointer.val)
-            # elif pointer.right != None:
-            #     pointer.val = self.inorder_traversal(pointer.right)
-            #     if pointer.left != None:
-            #         pointer.val = self.inorder_traversal(pointer.left)
-            #     else:
-            #         List.append(pointer.val)
-            # else:
-            #     List.append(pointer.val)
