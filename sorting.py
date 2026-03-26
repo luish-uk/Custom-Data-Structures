@@ -4,6 +4,8 @@ class Sorting:
     def __init__(self, List: list):
         self.List = List
 
+
+    """Bubblesort algorithm using pop and insert list methods. Time Complexity: O(n^2)"""
     def BubbleSort(self):
         s = self.List
         l = len(s)
@@ -15,6 +17,7 @@ class Sorting:
                     s.insert(j+1, n)
         return s
     
+    """Selectionsort algorithm using pop and insert list methods. Time Complexity: O(n^2)"""
     def SelectionSort(self):
         s = self.List
         l = len(s)
@@ -31,6 +34,7 @@ class Sorting:
                 s.insert(j, n)
         return s
     
+    """Merge Sort algorithm that divides the array and then recursively rebuilds it. Time Complexity: O(n log(n))"""
     def MergeSort(self, a=None):
         if a == None:
             a = self.List
@@ -53,6 +57,7 @@ class Sorting:
 
         return self.Merge(s1, s2)
 
+    """Merge algorithm that merges two arrays together in order. Time Complexity: O(n)"""
     def Merge(self, a, b):
         c = []
         while a and b:
